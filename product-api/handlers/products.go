@@ -24,7 +24,8 @@ import (
 )
 
 // A list of products returns in the response
-type productsResponse struct {
+// swagger: response productsResponseWrapper
+type productsResponseWrapper struct {
 	// All products in the system
 	// in: body
 	Body []data.Product

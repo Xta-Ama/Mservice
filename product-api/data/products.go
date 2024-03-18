@@ -62,6 +62,19 @@ func AddProduct(p *Product) {
 	productList = append(productList, p)
 }
 
+// Include the delete function
+func DeleteProduct(id int) error {
+	_, pos, err := findProduct(id)
+	if err != nil {
+		return err
+	}
+
+	// Remove the product from the productList slice.
+	productList = append(productList[:pos], productList[pos+1:]...)
+
+	return nil
+}
+
 func UpdateProduct(id int, p *Product) error {
 	_, pos, err := findProduct(id)
 	if err != nil {
