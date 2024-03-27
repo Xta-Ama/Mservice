@@ -1,13 +1,10 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
-	"os/signal"
-	"syscall"
 	"time"
 
 	"github.com/Xta-Ama/Mservice/api/handlers"
@@ -28,11 +25,13 @@ func main() {
 	r := mux.NewRouter()
 
 	sr := r.PathPrefix("/products").Subrouter()
+
 	sr.HandleFunc("/", ph.GetProducts).Methods(http.MethodGet)
 	sr.HandleFunc("/{id:[0-9]+}", ph.DeleteProduct).Methods(http.MethodDelete)
 
 	middlewareSr := r.PathPrefix("/products").Subrouter()
 	middlewareSr.Use(ph.MiddlewareValidateProduct)
+
 	middlewareSr.HandleFunc("/{id:[0-9]+}", ph.UpdateProducts).Methods(http.MethodPut)
 	middlewareSr.HandleFunc("/", ph.AddProduct).Methods(http.MethodPost)
 
@@ -51,23 +50,23 @@ func main() {
 		WriteTimeout: 1 * time.Second,
 	}
 
-	go func() {
-		err := srv.ListenAndServe()
-		if err != nil {
-			l.Fatal(err)
-		}
-	}()
+	// go func() {
+	// 	err := srv.ListenAndServe()
+	// 	if err != nil {
+	// 		l.Fatal(err)
+	// 	}
+	// }()
 
-	sigChan := make(chan os.Signal, 1)
-	signal.Notify(sigChan, os.Interrupt, syscall.SIGTERM)
+	// sigChan := make(chan os.Signal, 1)
+	// signal.Notify(sigChan, os.Interrupt, syscall.SIGTERM)
 
-	sig := <-sigChan
-	l.Println("Received terminate, graceful shutdown", sig)
+	// sig := <-sigChan
+	// l.Println("Received terminate, graceful shutdown", sig)
 
-	//graceful shutdown
-	tc, cancel := context.WithTimeout(context.Background(), 30*time.Second)
-	defer cancel()
-	srv.Shutdown(tc)
+	// //graceful shutdown
+	// tc, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	// defer cancel()
+	// srv.Shutdown(tc)
 
-	// log.Fatal(srv.ListenAndServe())
+	log.Fatal(srv.ListenAndServe())
 }
