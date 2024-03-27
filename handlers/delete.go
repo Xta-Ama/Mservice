@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/Xta-Ama/Mservice/api/data"
+	service "github.com/Xta-Ama/Mservice/service"
 
 	"github.com/gorilla/mux"
 )
@@ -16,9 +16,9 @@ func (p *Products) DeleteProduct(w http.ResponseWriter, r *http.Request) {
 
 	p.l.Println("Handle DELETE product", id)
 
-	err := data.DeleteProduct(id)
+	err := service.ProductDelete(id)
 
-	if err == data.ErrProductNotFound {
+	if err == service.ErrProductNotFound {
 		http.Error(w, "Product not found", http.StatusNotFound)
 		return
 	}

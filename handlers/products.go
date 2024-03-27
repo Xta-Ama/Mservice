@@ -1,18 +1,3 @@
-// Package classification of product API
-//
-// # Documentation for Product API
-//
-// Schemes: http
-// BasePath: /
-// Version: 1.0.0
-//
-// Consumes:
-// - application/json
-//
-// Produces:
-// - application/json
-//
-// swagger:meta
 package handlers
 
 import (
@@ -21,16 +6,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/Xta-Ama/Mservice/api/data"
+	"github.com/Xta-Ama/Mservice/models"
 )
-
-// A list of products returns in the response
-// swagger: response productsResponseWrapper
-type productsResponseWrapper struct {
-	// All products in the system
-	// in: body
-	Body []data.Product
-}
 
 // Products is a http.Handler
 type Products struct {
@@ -46,7 +23,7 @@ type KeyProduct struct{}
 
 func (p Products) MiddlewareValidateProduct(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		prod := data.Product{}
+		prod := models.Product{}
 
 		err := prod.FromJSON(r.Body)
 		if err != nil {

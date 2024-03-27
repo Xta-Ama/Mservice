@@ -7,7 +7,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/Xta-Ama/Mservice/api/handlers"
+	"github.com/Xta-Ama/Mservice/handlers"
 
 	"github.com/gorilla/mux"
 	_ "github.com/joho/godotenv/autoload"

@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/Xta-Ama/Mservice/api/data"
-
+	"github.com/Xta-Ama/Mservice/models"
+	"github.com/Xta-Ama/Mservice/service"
 	"github.com/gorilla/mux"
 )
 
@@ -18,10 +18,10 @@ func (p *Products) UpdateProducts(w http.ResponseWriter, r *http.Request) {
 	}
 
 	p.l.Println("Handle PUT Product", id)
-	prod := r.Context().Value(KeyProduct{}).(data.Product)
+	prod := r.Context().Value(KeyProduct{}).(models.Product)
 
-	err = data.UpdateProduct(id, &prod)
-	if err == data.ErrProductNotFound {
+	err = service.ProductUpdate(id, &prod)
+	if err == service.ErrProductNotFound {
 		http.Error(w, "Product not found", http.StatusNotFound)
 		return
 	}
