@@ -2,7 +2,8 @@ package handlers
 
 import (
 	"net/http"
-	"product-api/product-api/data"
+
+	"github.com/Xta-Ama/Mservice/api/data"
 )
 
 // swagger:route GET /products products listproducts

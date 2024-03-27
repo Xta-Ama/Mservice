@@ -6,8 +6,9 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
-	"product-api/product-api/handlers"
 	"time"
+
+	"github.com/Xta-Ama/Mservice/api/handlers"
 
 	"github.com/gorilla/mux"
 )

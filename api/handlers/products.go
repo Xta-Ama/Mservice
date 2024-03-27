@@ -20,7 +20,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"product-api/product-api/data"
+
+	"github.com/Xta-Ama/Mservice/api/data"
 )
 
 // A list of products returns in the response
