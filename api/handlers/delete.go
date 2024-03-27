@@ -10,7 +10,7 @@ import (
 )
 
 func (p *Products) DeleteProduct(w http.ResponseWriter, r *http.Request) {
-	//this will always convert becasue of the router
+	//this will always convert because of the router
 	vars := mux.Vars(r)
 	id, _ := strconv.Atoi(vars["id"])
 

@@ -11,5 +11,4 @@ func (p *Products) AddProduct(w http.ResponseWriter, r *http.Request) {
 
 	prod := r.Context().Value(KeyProduct{}).(data.Product)
 	data.AddProduct(&prod)
-
 }
