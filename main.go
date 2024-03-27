@@ -7,6 +7,7 @@ import (
 	"os"
 	"time"
 
+	_ "github.com/Xta-Ama/Mservice/docs"
 	"github.com/Xta-Ama/Mservice/handlers"
 
 	"github.com/gorilla/mux"
@@ -34,8 +35,6 @@ func main() {
 	l := log.New(os.Stdout, "product-api", log.LstdFlags)
 
 	ph := handlers.NewProducts(l)
-
-	// creating a new serve mux
 	r := mux.NewRouter()
 
 	sr := r.PathPrefix("/products").Subrouter()
@@ -83,5 +82,6 @@ func main() {
 	// tc, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	// defer cancel()
 	// srv.Shutdown(tc)
+
 	log.Fatal(srv.ListenAndServe())
 }
