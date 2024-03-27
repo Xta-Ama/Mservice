@@ -9,6 +9,17 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// Update Product
+//
+//	@Summary		Upload file
+//	@Description	Upload file
+//	@Accept			multipart/form-data
+//	@Produce		json
+//	@Param			file	formData	file			true	"this is a test file"
+//	@Success		200		{string}	string			"ok"
+//	@Failure		400		{object}	string	"We need ID!!"
+//	@Failure		404		{object}	string	"Can not find ID"
+//	@Router			/products [put]
 func (p *Products) UpdateProducts(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
